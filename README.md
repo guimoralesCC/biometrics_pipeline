@@ -52,3 +52,174 @@ o	Checks synchronization
 o	Plots EEG/physio vs interactions
 o	Computes latency and packet loss
 This modular pipeline allows each subsystem to evolve independently while maintaining timing integrity through LSL’s shared clock.
+
+3. Unreal Quest 3 Application Framework 
+
+The VR application was built in Unreal Engine 5.4 and successfully deployed to the Meta Quest 3 as a standalone Android build. Key features include: 
+
+3.1 Interaction Model 
+
+Grabbing, releasing, and placing objects 
+
+Hand-tracking-based interactions (OculusXR plugin) 
+
+3.2 Interaction Logging 
+
+Every significant action is logged with both Unreal time and LSL time: 
+
+{"event":"grab",} 
+
+These logs support later alignment with EEG and physiological events. 
+
+Shape 
+
+4. Biosignal Data Integration 
+
+4.1 EEG Stream (Mindtooth) 
+
+The pipeline: 
+
+Mindtooth → BrainFlow → Python → LSL Outlet → LabRecorder 
+
+Key properties: 
+
+8 EEG channels 
+
+<1 % packet loss during 3+ minute sessions 
+
+Tests confirmed stable numerical output, clean signal structure, and valid timestamps. 
+
+Shape 
+
+4.2 EmotiBit Stream 
+
+EmotiBit data includes: 
+
+Electrodermal activity (EDA) 
+
+ECG 
+
+Temperature 
+
+Accelerometer/gyroscope 
+
+Data is parsed and broadcast via Python as an LSL outlet containing structured JSON. 
+Real-time streaming and graphical checks confirmed consistent sampling. 
+
+Shape 
+
+4.3 Multi-Stream Synchronization Mechanism 
+
+LabRecorder automatically maintains a shared timebase. 
+This allowed EEG, ECG, EDA, accelerometer, and VR events to occupy the same global timeline without manual offsetting. 
+
+Shape 
+
+5. JSON Schema and Data Synchronization 
+
+A unified dictionary format was developed to standardize all incoming samples: 
+
+{ 
+
+  "device": "Mindtooth", 
+
+} 
+
+VR interaction events follow a nearly identical structure, allowing seamless merging inside Python. 
+
+5.1 Alignment Results 
+
+Shape 
+
+6. Pilot Dataset Collection 
+
+Shape 
+
+7. System Performance Evaluation 
+
+7.1 Measurement Framework 
+
+Three metrics were analyzed: 
+
+End-to-End Latency 
+Time from VR action  recorded biosignal marker. 
+
+7.2 Data Collection Method 
+
+Quest app logs events to LSL + local JSON 
+
+Mindtooth and EmotiBit stream to LSL 
+
+LabRecorder collects all 
+
+Python scripts compute metrics from the .xdf dump 
+
+7.3 Results 
+
+7.4 Analysis 
+
+Shape 
+
+8. Documentation and Dissemination 
+
+A structured public GitHub repository includes: 
+
+Source code for the Unreal Quest application 
+
+LSL plugin code for Android and desktop 
+
+Python scripts for EEG/physio acquisition 
+
+JSON schemas and dataset examples 
+
+Setup instructions 
+
+Development logs and weekly updates 
+
+A demo video will showcase: 
+
+Real-time biosignal capture 
+
+Interaction logging 
+
+The VR task experience 
+
+Synchronization results 
+
+This repository forms the foundation for future replication and expansion of the system. 
+
+Shape 
+
+9. Research Practices and Data Ethics 
+
+All datasets are pseudonymized using session IDs. 
+No personally identifying information is stored. 
+Sensors are handled safely using IRB-aligned practices for pilot physiological data. 
+Regular communication, weekly check-ins, and responsible documentation demonstrate strong professionalism throughout the project cycle. 
+
+Shape 
+
+10. Conclusion and Future Directions 
+
+This project demonstrates a fully operational XR biosensing system on the Meta Quest 3 capable of real-time EEG and physiological integration with synchronized VR interactions. 
+The system is flexible, extensible, and suitable for cognitive research, attention modeling, and experimental human-computer interaction studies. 
+
+Future directions include: 
+
+Real-time cognitive state estimation 
+
+Adaptive VR environments based on biosignal feedback 
+
+More robust Android-native LSL recorders 
+
+Integration with AR components in Fresh++ and Mad Vision research 
+
+Additional datasets from multiple participants 
+
+Advanced machine learning models for workload and engagement prediction 
+
+The work represents a major step in building augmentation interfaces that empower users with real-time self-awareness inside immersive environments. 
+
+Shape 
+
+References 
