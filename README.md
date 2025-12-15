@@ -140,7 +140,11 @@ Shape
 
 Shape 
 
-7. System Performance Evaluation 
+7. System Performance Evaluation
+   System performance was evaluated by examining the timing of recorded samples. For each continuous stream, we measured the time difference between consecutive timestamps to check    whether samples arrived at regular intervals. These measured intervals closely matched the expected sampling periods, with very little variation and no detected dropouts, indicating stable and reliable data collection.
+
+To evaluate synchronization, we compared the timestamps of Unreal interaction events with the nearest biosignal samples and measured the time difference between them. The average and maximum alignment errors were small and consistent with the biosignal sampling rate, showing that interaction events and physiological signals were well synchronized within the limits of the sampling resolution.
+
 
 7.1 Measurement Framework 
 
@@ -251,6 +255,3 @@ Shape
 
 References 
 
-System performance was evaluated by examining the timing of recorded samples. For each continuous stream, we measured the time difference between consecutive timestamps to check whether samples arrived at regular intervals. These measured intervals closely matched the expected sampling periods, with very little variation and no detected dropouts, indicating stable and reliable data collection.
-
-To evaluate synchronization, we compared the timestamps of Unreal interaction events with the nearest biosignal samples and measured the time difference between them. The average and maximum alignment errors were small and consistent with the biosignal sampling rate, showing that interaction events and physiological signals were well synchronized within the limits of the sampling resolution.
