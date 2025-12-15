@@ -1,0 +1,80 @@
+{  "title": "Minimal XDF to JSON Export",
+  "type": "object",
+  "required": ["version", "datetime", "time_units", "streams"],
+
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "JSON format version"
+    },
+
+    "datetime": {
+      "type": "string",
+      "description": "Export timestamp"
+    },
+
+    "time_units": {
+      "type": "string",
+      "enum": ["seconds"],
+      "description": "Units for all timestamps"
+    },
+
+    "streams": {
+      "type": "array",
+      "description": "Continuous or event-based streams",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "type",
+          "units",
+          "channel_count",
+          "nominal_srate",
+          "time_stamps",
+          "time_series"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+
+          "type": {
+            "type": "string"
+          },
+
+          "units": {
+            "type": "string",
+            "description": "Physical units or 'n/a' for marker streams"
+          },
+
+          "channel_count": {
+            "type": "integer",
+            "minimum": 1
+          },
+
+          "nominal_srate": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Hz; 0.0 indicates event-based stream"
+          },
+
+          "time_stamps": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+
+          "time_series": {
+            "type": "array",
+            "description": "Samples aligned with time_stamps",
+            "items": {
+              "type": "array",
+              "items": {}
+            }
+          }
+        }
+      }
+    }
+  }
+}
