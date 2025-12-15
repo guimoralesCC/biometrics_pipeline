@@ -127,7 +127,12 @@ A unified dictionary format was developed to standardize all incoming samples:
 
 VR interaction events follow a nearly identical structure, allowing seamless merging inside Python. 
 
-5.1 Alignment Results 
+5.1 Alignment Results
+
+Used performance.py 
+System performance was evaluated by examining the timing of recorded samples. For each continuous stream, we measured the time difference between consecutive timestamps to check whether samples arrived at regular intervals. These measured intervals closely matched the expected sampling periods, with very little variation and no detected dropouts, indicating stable and reliable data collection.
+
+To evaluate synchronization, we compared the timestamps of Unreal interaction events with the nearest biosignal samples and measured the time difference between them. The average and maximum alignment errors were small and consistent with the biosignal sampling rate, showing that interaction events and physiological signals were well synchronized within the limits of the sampling resolution.
 
 Shape 
 
@@ -143,6 +148,28 @@ Three metrics were analyzed:
 
 End-to-End Latency 
 Time from VR action  recorded biosignal marker. 
+
+Example of perfomance anaylized 
+
+=== Reliability (continuous streams) ===
+EDA: 15.0 Hz, n=893, dt_mean=0.066660s (expected 0.066667s), jitter_std=2.00e-10s, dropouts=0
+PPG_RED: 25.0 Hz, n=1486, dt_mean=0.040081s (expected 0.040000s), jitter_std=1.47e-10s, dropouts=0
+102808-1051_eeg: 125.0 Hz, n=7440, dt_mean=0.008000s (expected 0.008000s), jitter_std=1.77e-10s, dropouts=0
+
+=== Event streams (informational) ===
+Unreal_LSL_GreenShape_Logger: n=5, avg gap=10.209s, max gap varies (event-based)
+Unreal_LSL_BlueShape_Logger: n=3, avg gap=20.680s, max gap varies (event-based)
+Unreal_LSL_GazeHit_Logger: n=1660, avg gap=0.028s, max gap varies (event-based)
+HR: n=56, avg gap=1.033s, max gap varies (event-based)
+102808-1051_bat: n=5, avg gap=10.170s, max gap varies (event-based)
+Unreal_LSL_RedShape_Logger: n=6, avg gap=8.282s, max gap varies (event-based)
+
+=== Sync Accuracy (Marker ↔ Bio) ===
+marker: Unreal_LSL_GazeHit_Logger
+bio:    EDA
+events: 1660
+mean |Δt|: 0.016655s
+max  |Δt|: 0.033310s
 
 7.2 Data Collection Method 
 
@@ -223,3 +250,7 @@ The work represents a major step in building augmentation interfaces that empowe
 Shape 
 
 References 
+
+System performance was evaluated by examining the timing of recorded samples. For each continuous stream, we measured the time difference between consecutive timestamps to check whether samples arrived at regular intervals. These measured intervals closely matched the expected sampling periods, with very little variation and no detected dropouts, indicating stable and reliable data collection.
+
+To evaluate synchronization, we compared the timestamps of Unreal interaction events with the nearest biosignal samples and measured the time difference between them. The average and maximum alignment errors were small and consistent with the biosignal sampling rate, showing that interaction events and physiological signals were well synchronized within the limits of the sampling resolution.
